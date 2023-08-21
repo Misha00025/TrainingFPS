@@ -149,7 +149,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533350294}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &533350296
 Camera:
   m_ObjectHideFlags: 0
@@ -273,6 +273,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2408703018761540146, guid: 0cecfb5d60ca32141978e87ba5b16f8b,
+        type: 3}
+      propertyPath: _gravity
+      value: -18
+      objectReference: {fileID: 0}
     - target: {fileID: 4445898604833016731, guid: 0cecfb5d60ca32141978e87ba5b16f8b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -321,6 +326,11 @@ PrefabInstance:
     - target: {fileID: 4445898604833016731, guid: 0cecfb5d60ca32141978e87ba5b16f8b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5097805374582359718, guid: 0cecfb5d60ca32141978e87ba5b16f8b,
+        type: 3}
+      propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -548,7 +558,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
