@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode _runKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
 
+    [Header("Animations")]
+    private Animator anim;
+
     private float _moveSpeed;
     private bool _isGrounded = false;
     private Vector3 _moveDirection = Vector3.zero;
@@ -41,6 +44,8 @@ public class PlayerController : MonoBehaviour
         {
             GetComponent<PlayerStats>().TakeDamage(5);
         }
+
+        HandleAnimations();
     }
 
     private void HandleMovement()
@@ -50,9 +55,9 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveDirection = new Vector3(moveX, 0 , moveZ);
         moveDirection = moveDirection.normalized;
-        moveDirection = transform.TransformDirection(moveDirection);
+        _moveDirection = transform.TransformDirection(moveDirection);
 
-        _controller.Move(moveDirection * _moveSpeed * Time.deltaTime);
+        _controller.Move(_moveDirection * _moveSpeed * Time.deltaTime);
     }
 
     private void HandleRuning()
@@ -64,6 +69,22 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(_runKey))
         {
             _moveSpeed = _walkSpeed;
+        }
+    }
+
+    private void HandleAnimations()
+    {
+        if(_moveDirection == Vector3.zero)
+        {
+            anim.SetFloat("Speed", 0f, 0.2f, Time.deltaTime);
+        }
+        else if(_moveDirection!= Vector3.zero && !Input.GetKey(_runKey)) 
+        {
+            anim.SetFloat("Speed", 0.5f, 0.2f, Time.deltaTime);
+        }
+        else if (_moveDirection != Vector3.zero && Input.GetKey(_runKey))
+        {
+            anim.SetFloat("Speed", 1f, 0.2f, Time.deltaTime);
         }
     }
 
@@ -92,6 +113,7 @@ public class PlayerController : MonoBehaviour
     private void GetReferences()
     {
         _controller = GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void InitVariables()
