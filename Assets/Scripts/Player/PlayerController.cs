@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.E)) 
+        if (Input.GetKeyDown(KeyCode.O)) 
         {
             GetComponent<PlayerStats>().TakeDamage(5);
         }

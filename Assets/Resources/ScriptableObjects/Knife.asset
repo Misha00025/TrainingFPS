@@ -16,7 +16,9 @@ MonoBehaviour:
   description: A simple knife
   icon: {fileID: 21300000, guid: da18b0976c6bf2a4e8d2a2c74a046d99, type: 3}
   prefab: {fileID: 1022281448342022424, guid: 69dd2f5c851b5fe43934b2a714acb855, type: 3}
+  muzzleFlashParticles: {fileID: 0}
   magazineSize: 0
   magazineCount: 0
   range: 2
   weaponType: 0
+  weaponStyle: 2
