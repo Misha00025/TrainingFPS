@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4445898604833016731}
   - component: {fileID: 4840881813735931307}
   - component: {fileID: 2942541833734850645}
+  - component: {fileID: 2230257842260060109}
   - component: {fileID: 2408703018761540146}
   - component: {fileID: 783413388815596281}
   m_Layer: 0
@@ -75,6 +76,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2230257842260060109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220239327471852908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ceaa35ea4935e648aee5c30bd4dff85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 0
+  _maxHealth: 100
 --- !u!114 &2408703018761540146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,7 +368,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.5
+  near clip plane: 0.2
   far clip plane: 1000
   field of view: 60
   orthographic: 0

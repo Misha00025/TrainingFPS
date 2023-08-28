@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,15 @@ public class PlayerController : MonoBehaviour
         HandleJumping();
         HandleRuning();
         HandleMovement();
+        HandleInput();
+    }
+
+    private void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E)) 
+        {
+            GetComponent<PlayerStats>().TakeDamage(5);
+        }
     }
 
     private void HandleMovement()
