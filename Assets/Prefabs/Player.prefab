@@ -156,8 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weapons:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 1c991ad748c5b054fab437156b0a68b6, type: 2}
+  - {fileID: 11400000, guid: 9f1342ff96085fe469e4fca6b4b580d2, type: 2}
 --- !u!114 &2601425800223298052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponHolder: {fileID: 988708403539278096}
-  _defaultWeapon: {fileID: 11400000, guid: 1c991ad748c5b054fab437156b0a68b6, type: 2}
+  currentWeaponBarel: {fileID: 0}
 --- !u!114 &1254661374036110839
 MonoBehaviour:
   m_ObjectHideFlags: 0
