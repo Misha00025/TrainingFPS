@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class PlayerHUD : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private WeaponUI weaponUI;
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateWeaponUI(Weapon newWeapon)
     {
-        
+        weaponUI.UpdateInfo(newWeapon.icon, newWeapon.magazineSize, newWeapon.magazineCount);
     }
 }
