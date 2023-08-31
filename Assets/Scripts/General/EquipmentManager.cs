@@ -12,7 +12,10 @@ public class EquipmentManager : MonoBehaviour
     private WeaponStyle _weaponStyle;
     private GameObject _currentWeapon = null;
 
+    public Transform currentWeaponBarel = null;
+
     public WeaponStyle WeaponStyle => _weaponStyle;
+
 
     private void Start()
     {
@@ -56,6 +59,7 @@ public class EquipmentManager : MonoBehaviour
         if (weapon != null)
         {
             _currentWeapon = Instantiate(weapon.prefab, _weaponHolder);
+            currentWeaponBarel = _currentWeapon.transform.GetChild(0);
         }
     }
 

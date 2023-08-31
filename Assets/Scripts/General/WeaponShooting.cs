@@ -44,6 +44,8 @@ public class WeaponShooting : MonoBehaviour
         {
             Debug.Log("Target is out of range");
         }
+
+        Instantiate(weapon.muzzleFlashParticles, _equipmentManager.currentWeaponBarel);
     }
 
     private void Shoot()
