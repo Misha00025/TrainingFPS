@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
@@ -8,6 +9,7 @@ public class EquipmentManager : MonoBehaviour
 
     private Animator _animator;
     private Inventory _inventory;
+    private PlayerHUD _hud;
 
     private WeaponStyle _weaponStyle;
     private GameObject _currentWeapon = null;
@@ -25,7 +27,6 @@ public class EquipmentManager : MonoBehaviour
     private void Update()
     {
         WeaponStyle weaponStyle = _weaponStyle;
-        bool pressed = false;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             weaponStyle = WeaponStyle.Primary;
@@ -60,6 +61,9 @@ public class EquipmentManager : MonoBehaviour
         {
             _currentWeapon = Instantiate(weapon.prefab, _weaponHolder);
             currentWeaponBarel = _currentWeapon.transform.GetChild(0);
+
+            //Update weaponUI
+            _hud.UpdateWeaponUI(weapon);
         }
     }
 
@@ -76,5 +80,6 @@ public class EquipmentManager : MonoBehaviour
     {
         _animator = GetComponentInChildren<Animator>();
         _inventory = GetComponentInChildren<Inventory>();
+        _hud = GetComponent<PlayerHUD>();
     }
 }

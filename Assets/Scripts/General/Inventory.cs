@@ -6,8 +6,6 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private Weapon[] _weapons = new Weapon[3];
 
-    private PlayerHUD hud;
-
     private void Awake()
     {
         GetReferences();
@@ -16,7 +14,7 @@ public class Inventory : MonoBehaviour
 
     private void GetReferences()
     {
-        hud = GetComponent<PlayerHUD>();
+
     }
 
     private void Update()
@@ -29,9 +27,6 @@ public class Inventory : MonoBehaviour
         if (_weapons[index] != null)
             RemoveItem(newItem.weaponStyle);
         _weapons[index] = newItem;
-
-        //Update weaponUI
-        hud.UpdateWeaponUI(newItem);
     }
 
     public void RemoveItem(WeaponStyle weaponStyle)
