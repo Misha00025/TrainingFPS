@@ -8,12 +8,13 @@ public class Weapon : Item
 {
     public GameObject prefab;
     public GameObject muzzleFlashParticles;
-    public int magazineSize; //количество пулей в магазине
-    public int magazineCount; //количество магазиноов, которое мы можем хранить
-    public float range; //дальность стрельбы
+    public int magazineSize; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public int magazineCount; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float range; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float fireRate;
     public WeaponType weaponType;
     public WeaponStyle weaponStyle;
 }
 
-public enum WeaponType { Melee, Pistol, AR, ShotGun, Sniper} //различные виды оружия (пока есть только пистолет и нож)
-public enum WeaponStyle { Primary, Secondary, Melee} //различные виды оружия по важности
+public enum WeaponType { Melee, Pistol, AR, ShotGun, Sniper} //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ)
+public enum WeaponStyle { Primary, Secondary, Melee} //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
