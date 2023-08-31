@@ -5,11 +5,15 @@ using UnityEngine;
 public class EquipmentManager : MonoBehaviour
 {
     [SerializeField] private Transform _weaponHolder = null;
+    [SerializeField] private Weapon _defaultWeapon;
 
     private Animator _animator;
     private Inventory _inventory;
 
     private WeaponStyle _weaponStyle;
+    private GameObject _currentWeapon = null;
+
+    public WeaponStyle WeaponStyle => _weaponStyle;
 
     private void Start()
     {
@@ -32,25 +36,45 @@ public class EquipmentManager : MonoBehaviour
         {
             weaponStyle = WeaponStyle.Melee;
         }
-        if (_inventory.GetItem(weaponStyle) != null && weaponStyle != _weaponStyle)
+
+        SetWeaponStyle(weaponStyle);
+    }
+
+    public void SetWeaponStyle(WeaponStyle weaponStyle)
+    {
+        Weapon weapon = _inventory.GetItem(weaponStyle);
+        if (weapon != null && weaponStyle != _weaponStyle)
         {
-            Weapon weapon = _inventory.GetItem(weaponStyle);
-            WeaponType weaponType = weapon.weaponType;
-            Debug.Log("Choose " + weaponType.ToString() + "(" + (int)weaponType + ") weapon");
-            _animator.SetInteger("WeaponType", (int)weaponType);
-            EquipWeapon(weapon.prefab);
             _weaponStyle = weaponStyle;
+            _animator.SetTrigger("UnequipWeapon");
+            _animator.SetInteger("WeaponType", (int)weapon.weaponType);
         }
     }
 
-    private void EquipWeapon(GameObject weaponObject)
+    public void EquipWeapon()
     {
-        Instantiate(weaponObject, _weaponHolder);
+        Weapon weapon = _inventory.GetItem(_weaponStyle);
+        if (weapon != null)
+        {
+            _currentWeapon = Instantiate(weapon.prefab, _weaponHolder);
+        }
+    }
+
+    public void UnequipWeapon()
+    {
+        Weapon weapon = _inventory.GetItem(_weaponStyle);
+        if (weapon != null)
+        {
+            Destroy(_currentWeapon);
+        }
     }
 
     private void GetReferences()
     {
         _animator = GetComponentInChildren<Animator>();
         _inventory = GetComponentInChildren<Inventory>();
+        _inventory.AddItem(_defaultWeapon);
+        _weaponStyle = _defaultWeapon.weaponStyle;
+        SetWeaponStyle(_weaponStyle);
     }
 }

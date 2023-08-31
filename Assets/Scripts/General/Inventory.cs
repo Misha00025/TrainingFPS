@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
 {
     private Weapon[] _weapons;
 
-    private void Start()
+    private void Awake()
     {
         InitVariables();
     }
