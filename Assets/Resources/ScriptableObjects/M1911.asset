@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: M1911
   description: A cool pistol
-  icon: {fileID: 21300000, guid: 6a1f5f9bbff33c44dab1fe60b7e265bd, type: 3}
+  icon: {fileID: 21300000, guid: 476964234c51e7f4bb4379719cb2e024, type: 3}
   prefab: {fileID: 1483614995309609407, guid: 64febb43e129f174e9e1df78f1091eb6, type: 3}
   muzzleFlashParticles: {fileID: 1537962586364842122, guid: ca89784909eb6ed408145c79aa5af05d,
     type: 3}
