@@ -46,11 +46,11 @@ public class EquipmentManager : MonoBehaviour
     public void SetWeaponStyle(WeaponStyle weaponStyle)
     {
         Weapon weapon = _inventory.GetItem(weaponStyle);
-        if (weapon != null && weaponStyle != _weaponStyle)
+        if (weapon != null && (weaponStyle != _weaponStyle || (int)weapon.weaponType != _animator.GetInteger("WeaponType")))
         {
             _weaponStyle = weaponStyle;
-            _animator.SetTrigger("UnequipWeapon");
             _animator.SetInteger("WeaponType", (int)weapon.weaponType);
+            _animator.SetTrigger("UnequipWeapon");
         }
     }
 
