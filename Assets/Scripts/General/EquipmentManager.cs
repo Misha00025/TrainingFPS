@@ -5,7 +5,6 @@ using UnityEngine;
 public class EquipmentManager : MonoBehaviour
 {
     [SerializeField] private Transform _weaponHolder = null;
-    [SerializeField] private Weapon _defaultWeapon;
 
     private Animator _animator;
     private Inventory _inventory;
@@ -73,8 +72,5 @@ public class EquipmentManager : MonoBehaviour
     {
         _animator = GetComponentInChildren<Animator>();
         _inventory = GetComponentInChildren<Inventory>();
-        _inventory.AddItem(_defaultWeapon);
-        _weaponStyle = _defaultWeapon.weaponStyle;
-        SetWeaponStyle(_weaponStyle);
     }
 }

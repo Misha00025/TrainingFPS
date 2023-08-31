@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private Weapon[] _weapons;
+    [SerializeField] private Weapon[] _weapons = new Weapon[3];
 
     private void Awake()
     {
@@ -42,6 +42,6 @@ public class Inventory : MonoBehaviour
 
     private void InitVariables()
     {
-        _weapons = new Weapon[3];
+        
     }
 }
