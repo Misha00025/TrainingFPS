@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class Inventory
+public class Inventory : IInventory
 {
     [SerializeField] private Weapon[] _weapons = new Weapon[3];
 
@@ -36,4 +36,11 @@ public class Inventory
         return _weapons[index];
     }
 
+}
+
+public interface IInventory
+{
+    void AddItem(Weapon weapon);
+    void RemoveItem(WeaponStyle weaponStyle);
+    Weapon GetItem(WeaponStyle weaponStyle);
 }

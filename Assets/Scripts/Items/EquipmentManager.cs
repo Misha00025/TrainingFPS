@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
-public class EquipmentManager : MonoBehaviour
+public class EquipmentManager : MonoBehaviour, IEquipmentManager
 {
     [SerializeField] private Transform _weaponHolder = null;
 
     private Animator _animator;
-    private Inventory _inventory;
+    private IInventory _inventory;
     private PlayerHUD _hud;
 
     private WeaponStyle _weaponStyle;
@@ -79,7 +78,19 @@ public class EquipmentManager : MonoBehaviour
     private void GetReferences()
     {
         _animator = GetComponentInChildren<Animator>();
-        _inventory = GetComponentInChildren<PlayerController>().Inventory;
+        _inventory = GetComponentInChildren<PlayerController>();
         _hud = GetComponent<PlayerHUD>();
     }
+
+    public void SetCurrentWeapon(WeaponStyle weaponStyle)
+    {
+        SetWeaponStyle(weaponStyle);
+    }
+}
+
+public interface IEquipmentManager
+{
+    void SetCurrentWeapon(WeaponStyle weaponStyle);
+    void EquipWeapon();
+    void UnequipWeapon();
 }

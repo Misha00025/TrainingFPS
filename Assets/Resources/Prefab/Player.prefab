@@ -93,8 +93,6 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 11400000, guid: 1c991ad748c5b054fab437156b0a68b6, type: 2}
     - {fileID: 11400000, guid: 9f1342ff96085fe469e4fca6b4b580d2, type: 2}
-  _runKey: 304
-  _jumpKey: 32
 --- !u!114 &4840881813735931307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3c77a419fabd74bb0e7c25a0d48e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _runKey: 304
+  _jumpKey: 32
 --- !u!114 &783413388815596281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,7 +485,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 1590561934370686160}
-  m_PlaneDistance: 0.5
+  m_PlaneDistance: 0.1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -495,7 +495,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &337844714938936382
 MonoBehaviour:

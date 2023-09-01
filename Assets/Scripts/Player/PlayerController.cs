@@ -2,65 +2,45 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IMover, IHealthState, IDamagable, IInventory, IEquipmentManager
 {
     [SerializeField] private CharacterMover _mover;
     [SerializeField] private PlayerStats _stats;
     [SerializeField] private Inventory _inventory;
-    
-    [Header("Inputs")]
-    [SerializeField] private KeyCode _runKey = KeyCode.LeftShift;
-    [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
+    [SerializeField] private EquipmentManager _equipment;
 
     [Header("References")]
     private Animator anim;
-    private CharacterController _controller;
-    
-    public PlayerStats Stats => _stats;
     public Inventory Inventory => _inventory;
+    public Vector3 Direction => _mover.Direction;
+    public int Health => _stats.Health;
+    public int MaxHealth => _stats.MaxHealth;
 
     private void Start()
     {
-        GetReferences();
-        InitVariables();
+        Initialize();
     }
 
-    private void Update()
+    public void Initialize()
     {
-        HandleMovement();
-        HandleInput();
-        HandleAnimations();
+        anim = GetComponentInChildren<Animator>();
+
+        _mover.InitVariables(GetComponent<CharacterController>());
+        _stats.InitVariables();
+        _inventory.InitVariables();
     }
 
-    private void HandleInput()
+    public void SetRuning(bool run)
     {
-        if (Input.GetKeyDown(KeyCode.O)) 
-        {
-            Stats.TakeDamage(5);
-        }
-    }
-
-    private void HandleMovement()
-    {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
-
-        Vector3 moveDirection = new Vector3(moveX, 0 , moveZ);
-        moveDirection = moveDirection.normalized;
-
-        _mover.SetRuning(Input.GetKey(_runKey));
-        _mover.Move(moveDirection, Input.GetKeyDown(_jumpKey));
-    }
-
-    private void HandleAnimations()
-    {
-        if(_mover.Direction == Vector3.zero)
+        _mover.SetRuning(run);
+        if (_mover.Direction == Vector3.zero)
         {
             anim.SetFloat("Speed", 0f, 0.2f, Time.deltaTime);
         }
-        else if(!Input.GetKey(_runKey)) 
+        else if (!run)
         {
             anim.SetFloat("Speed", 0.5f, 0.2f, Time.deltaTime);
         }
@@ -70,16 +50,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void GetReferences()
-    {
-        _controller = GetComponent<CharacterController>();
-        anim = GetComponentInChildren<Animator>();
-    }
+    public void Move(Vector3 direction, bool jump) => _mover.Move(direction, jump);
+    public void AddListenerToHealthChange(UnityAction<IHealthState> action) => _stats.AddListenerToHealthChange(action);
+    public void TakeDamage(int damage) => _stats.TakeDamage(damage);
+    public void AddItem(Weapon weapon) => _inventory.AddItem(weapon);
+    public void RemoveItem(WeaponStyle weaponStyle) => _inventory.RemoveItem(weaponStyle);
+    public Weapon GetItem(WeaponStyle weaponStyle) => _inventory.GetItem(weaponStyle);
 
-    private void InitVariables()
-    {
-        _mover.InitVariables(_controller);
-        _stats.InitVariables();
-        _inventory.InitVariables();
-    }
+    public void SetCurrentWeapon(WeaponStyle weaponStyle) =>  throw new NotImplementedException();
+    public void EquipWeapon() => throw new NotImplementedException();
+    public void UnequipWeapon() => throw new NotImplementedException();
 }

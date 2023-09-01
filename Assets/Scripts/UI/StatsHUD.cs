@@ -10,7 +10,7 @@ public class StatsHUD : MonoBehaviour
     [SerializeField] private Image _healthBar;
     [SerializeField] private TextMeshProUGUI _healthCounter;
 
-    private PlayerStats _playerStats;
+    private IHealthState _playerStats;
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class StatsHUD : MonoBehaviour
     private void InitReferences()
     {
         PlayerController controller = GetComponent<PlayerController>();
-        _playerStats = controller.Stats;
+        _playerStats = controller;
         _playerStats.AddListenerToHealthChange(HealthBarUpdate);
     }
 

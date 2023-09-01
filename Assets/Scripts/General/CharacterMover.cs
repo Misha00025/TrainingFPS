@@ -57,6 +57,8 @@ public class CharacterMover : IMover
 
 public interface IMover
 {
+    Vector3 Direction { get; }
+
     void Move(Vector3 direction, bool jump);
 
     void SetRuning(bool run);

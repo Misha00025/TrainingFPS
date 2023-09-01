@@ -4,7 +4,7 @@ public class WeaponShooting : MonoBehaviour
 {
     private float _lastShootTime = 0;
     private Camera _camera;
-    private Inventory _inventory;
+    private IInventory _inventory;
     private EquipmentManager _equipmentManager;
 
     private void Start()
@@ -23,7 +23,7 @@ public class WeaponShooting : MonoBehaviour
     private void GetReferences()
     {
         _camera = GetComponentInChildren<Camera>();
-        _inventory = GetComponent<PlayerController>().Inventory;
+        _inventory = GetComponent<PlayerController>();
         _equipmentManager = GetComponent<EquipmentManager>();
     }
 
