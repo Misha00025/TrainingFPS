@@ -1,24 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+[Serializable]
+public class Inventory
 {
     [SerializeField] private Weapon[] _weapons = new Weapon[3];
 
-    private void Awake()
-    {
-        GetReferences();
-        InitVariables();
-    }
-
-    private void GetReferences()
+    public void InitVariables()
     {
 
-    }
-
-    private void Update()
-    {
     }
 
     public void AddItem(Weapon newItem)
@@ -44,11 +34,6 @@ public class Inventory : MonoBehaviour
     {
         int index = (int)weaponStyle;
         return _weapons[index];
-    }
-
-    private void InitVariables()
-    {
-        
     }
 
 }

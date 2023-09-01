@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(PlayerStats))]
+[RequireComponent(typeof(PlayerController))]
 public class StatsHUD : MonoBehaviour
 {
     [SerializeField] private Image _healthBar;
@@ -21,7 +21,8 @@ public class StatsHUD : MonoBehaviour
 
     private void InitReferences()
     {
-        _playerStats = GetComponent<PlayerStats>();
+        PlayerController controller = GetComponent<PlayerController>();
+        _playerStats = controller.Stats;
         _playerStats.AddListenerToHealthChange(HealthBarUpdate);
     }
 

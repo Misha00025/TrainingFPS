@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerController))]
 public class PlayerPickUp : MonoBehaviour
 {
     [SerializeField] private float _pickupRange = 1.0f;
@@ -26,7 +27,7 @@ public class PlayerPickUp : MonoBehaviour
     private void InitReferences()
     {
         _camera = GetComponentInChildren<Camera>();
-        _inventory = GetComponent<Inventory>();
+        _inventory = GetComponent<PlayerController>().Inventory;
     }
 
     private void InputHandler()

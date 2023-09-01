@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(PlayerController))]
 public class PlayerInput : MonoBehaviour
 {
-    private static PlayerInput _instance;
-    public static PlayerInput Instance => _instance;
 
-    public UnityEvent<ActionStatus, KeyCode> KeyPressed { get; private set; } = new UnityEvent<ActionStatus, KeyCode>();
 
-    private void Awake()
+    private void Start()
     {
-        if (_instance == null)
-            _instance = this;
-        else
-            Destroy(this);
+        
     }
 
     private void Update()
@@ -24,17 +19,4 @@ public class PlayerInput : MonoBehaviour
     }
 }
 
-public enum PlayerAction
-{
-    None,
-    Move,
-    LookAround
-}
-
-public enum ActionStatus
-{
-    None,
-    Down,
-    Up,
-    Hold
-}
+    

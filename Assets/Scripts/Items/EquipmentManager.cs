@@ -79,7 +79,7 @@ public class EquipmentManager : MonoBehaviour
     private void GetReferences()
     {
         _animator = GetComponentInChildren<Animator>();
-        _inventory = GetComponentInChildren<Inventory>();
+        _inventory = GetComponentInChildren<PlayerController>().Inventory;
         _hud = GetComponent<PlayerHUD>();
     }
 }

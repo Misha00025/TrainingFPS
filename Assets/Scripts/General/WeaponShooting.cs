@@ -23,7 +23,7 @@ public class WeaponShooting : MonoBehaviour
     private void GetReferences()
     {
         _camera = GetComponentInChildren<Camera>();
-        _inventory = GetComponent<Inventory>();
+        _inventory = GetComponent<PlayerController>().Inventory;
         _equipmentManager = GetComponent<EquipmentManager>();
     }
 
@@ -45,7 +45,8 @@ public class WeaponShooting : MonoBehaviour
             Debug.Log("Target is out of range");
         }
 
-        Instantiate(weapon.muzzleFlashParticles, _equipmentManager.currentWeaponBarel);
+        if (weapon.muzzleFlashParticles != null)
+            Instantiate(weapon.muzzleFlashParticles, _equipmentManager.currentWeaponBarel);
     }
 
     private void Shoot()

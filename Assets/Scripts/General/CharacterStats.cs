@@ -1,19 +1,19 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CharacterStats : MonoBehaviour, IHealthState, IDamagable
+
+[Serializable]
+public class CharacterStats : IHealthState, IDamagable
 {
-    [SerializeField] private int _health;
     [SerializeField] private int _maxHealth;
+    private int _health;
 
     private UnityEvent<IHealthState> _healthChanged = new UnityEvent<IHealthState>();
-    
-    private void Start()
+
+    public void InitVariables()
     {
-        InitVariables();
+        SetCurrentHealth(_maxHealth);
     }
 
     private void CheckHealth()
@@ -44,11 +44,6 @@ public class CharacterStats : MonoBehaviour, IHealthState, IDamagable
     {
         int healthAfterHeal = _health + heal;
         SetCurrentHealth(healthAfterHeal);
-    }
-
-    public void InitVariables()
-    {
-        SetCurrentHealth(_maxHealth);
     }
 
     public void AddListenerToHealthChange(UnityAction<IHealthState> action)
