@@ -4,6 +4,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(CharacterController), typeof(PlayerHUD))]
 public class PlayerController : MonoBehaviour, IMover, IHealthState, IDamagable, IInventory, IEquipmentManager, IShooter, IPicker
 {
+    [SerializeField] private CameraController _cameraController;
     [SerializeField] private CharacterMover _mover;
     [SerializeField] private PlayerStats _stats;
     [SerializeField] private Inventory _inventory;
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour, IMover, IHealthState, IDamagable,
     [SerializeField] private PlayerPickUp _pickup;
     private Animator anim;
 
+    public CameraController CameraController => _cameraController;
     public Vector3 Direction => _mover.Direction;
     public int Health => _stats.Health;
     public int MaxHealth => _stats.MaxHealth;
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour, IMover, IHealthState, IDamagable,
     {
         anim = GetComponentInChildren<Animator>();
 
+        _cameraController.InitVariables();
         _mover.InitVariables(GetComponent<CharacterController>());
         _stats.InitVariables();
         _inventory.InitVariables(this);

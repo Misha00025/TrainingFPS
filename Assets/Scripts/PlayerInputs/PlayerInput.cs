@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(PlayerController))]
 public class PlayerInput : MonoBehaviour
 {
+    [Header("Camera Input")]
+    [SerializeField] private float _mouseSensitivity;
+
     [Header("Movement Input")]
     [SerializeField] private KeyCode _runKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
@@ -33,6 +35,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
+        HandleCameraInput();
         HandleMovementInput();
         HandleEquipmentInput();
         HandleShootingInput();
@@ -86,6 +89,14 @@ public class PlayerInput : MonoBehaviour
 
         _playerController.SetRuning(Input.GetKey(_runKey));
         _playerController.Move(moveDirection, Input.GetKeyDown(_jumpKey));
+    }
+
+    private void HandleCameraInput()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity * Time.deltaTime;
+
+        _playerController.CameraController.RotateCamera(mouseX, mouseY);
     }
 }
 

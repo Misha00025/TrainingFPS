@@ -1,47 +1,47 @@
+using System;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+[Serializable]
+public class CameraController : ICameraMover
 {
-    [SerializeField] private float _mouseSensitivity = 1.0f;
+    [SerializeField, Range(0, 90)] private int _maxAngle = 90;
+    [SerializeField, Range(-90, 0)] private int _minAngle = -90;
     [SerializeField] private Transform _headTransform;
     [SerializeField] private Transform _bodyTransform;
 
     private float _xRotation;
 
-    private void Start()
+    public void InitVariables()
     {
         LockCursor();
     }
 
-    private void Update()
-    {
-        
-        HandleMouseLook();
-    }
-
-    private void HandleMouseLook()
+    public void RotateCamera(float mouseX, float mouseY)
     {
         if (_headTransform == null) throw new System.Exception("Не задан Transform для головы");
         if (_bodyTransform == null) throw new System.Exception("Не задан Transform для тела");
 
-        float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity * Time.deltaTime;
-
         _xRotation -= mouseY;
-        _xRotation =  Mathf.Clamp(_xRotation, -90, 90);
+        _xRotation =  Mathf.Clamp(_xRotation, _minAngle, _maxAngle);
 
         _headTransform.localRotation = Quaternion.Euler(_xRotation, 0, 0);
         _bodyTransform.Rotate(new Vector3(0, mouseX, 0)); 
     }
 
-    private void LockCursor()
+    public void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void UnlockCursor()
+    public void UnlockCursor()
     {
         Cursor.lockState -= CursorLockMode.None;
     }
+}
 
+interface ICameraMover
+{
+    void RotateCamera(float mouseX, float mouseY);
+    void LockCursor();
+    void UnlockCursor();
 }
