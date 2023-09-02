@@ -11,7 +11,7 @@ public class CharacterStats : IHealthState, IDamagable
 
     private UnityEvent<IHealthState> _healthChanged = new UnityEvent<IHealthState>();
 
-    public void InitVariables()
+    public virtual void InitVariables()
     {
         SetCurrentHealth(_maxHealth);
     }
