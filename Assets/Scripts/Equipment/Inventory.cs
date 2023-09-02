@@ -1,33 +1,36 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
 public class Inventory : IInventory
 {
-    [SerializeField] private Weapon[] _weapons = new Weapon[3];
+    [SerializeField] private WeaponScriptableObject[] _defaultWeapons;
+    private Weapon[] _weapons = new Weapon[3];
 
-    public void InitVariables()
+    private PlayerController _playerController;
+
+    public void InitVariables(PlayerController playerController)
     {
-
+        _playerController = playerController;
+        foreach (var weapon in _defaultWeapons)
+        {
+            if (weapon != null) AddItem(weapon);
+        }
     }
 
-    public void AddItem(Weapon newItem)
+    public void AddItem(WeaponScriptableObject newItem)
     {
         int index = (int)newItem.weaponStyle;
         if (_weapons[index] != null)
             RemoveItem(newItem.weaponStyle);
-        _weapons[index] = newItem;
+        _weapons[index] = new Weapon(newItem, _playerController.WeaponHolder);
     }
 
     public void RemoveItem(WeaponStyle weaponStyle)
     {
         int index = (int)weaponStyle;
-        Weapon dropedItem = _weapons[index];
         _weapons[index] = null;
-        if (dropedItem != null)
-        {
-
-        }
     }
 
     public Weapon GetItem(WeaponStyle weaponStyle)
@@ -40,7 +43,7 @@ public class Inventory : IInventory
 
 public interface IInventory
 {
-    void AddItem(Weapon weapon);
+    void AddItem(WeaponScriptableObject weapon);
     void RemoveItem(WeaponStyle weaponStyle);
     Weapon GetItem(WeaponStyle weaponStyle);
 }

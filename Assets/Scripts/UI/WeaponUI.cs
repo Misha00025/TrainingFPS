@@ -10,11 +10,10 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI magazineSizeText;
     [SerializeField] private TextMeshProUGUI magazineCountText;
 
-    public void UpdateInfo(Sprite weaponIcon, int magazineSize, int magazineCount)
+    public void UpdateInfo(Sprite weaponIcon, int currentAmo, int maxAmmo)
     {
         icon.sprite = weaponIcon;
-        magazineSizeText.SetText( magazineSize.ToString() );
-        int magazineCountAmount = magazineSize * magazineCount;
-        magazineCountText.SetText( magazineCountAmount.ToString() );
+        magazineSizeText.SetText( currentAmo.ToString() );
+        magazineCountText.SetText( maxAmmo.ToString() );
     }
 }

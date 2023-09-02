@@ -13,10 +13,6 @@ GameObject:
   - component: {fileID: 2408703018761540146}
   - component: {fileID: 4840881813735931307}
   - component: {fileID: 783413388815596281}
-  - component: {fileID: 3087296940902142983}
-  - component: {fileID: 2601425800223298052}
-  - component: {fileID: 7103639421771119111}
-  - component: {fileID: 1254661374036110839}
   - component: {fileID: 2307466341447790871}
   m_Layer: 0
   m_Name: Player
@@ -89,10 +85,16 @@ MonoBehaviour:
   _stats:
     _maxHealth: 100
   _inventory:
-    _weapons:
-    - {fileID: 0}
+    _defaultWeapons:
     - {fileID: 11400000, guid: 1c991ad748c5b054fab437156b0a68b6, type: 2}
     - {fileID: 11400000, guid: 9f1342ff96085fe469e4fca6b4b580d2, type: 2}
+  _equipment:
+    _weaponHolder: {fileID: 988708403539278096}
+  _pickup:
+    _pickupRange: 5
+    _pickupLayer:
+      serializedVersion: 2
+      m_Bits: 128
 --- !u!114 &4840881813735931307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +109,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _runKey: 304
   _jumpKey: 32
+  _primarySlotKey: 49
+  _secondarySlotKey: 50
+  _meleeSlotKey: 51
+  _shootKey: 323
+  _interactionKey: 101
+  _takeDamageSelfKey: 111
 --- !u!114 &783413388815596281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,63 +130,6 @@ MonoBehaviour:
   _mouseSensitivity: 100
   _headTransform: {fileID: 6501133247705324078}
   _bodyTransform: {fileID: 4445898604833016731}
---- !u!114 &3087296940902142983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220239327471852908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebb90281b9defc64d9b755fda0576e68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healthBar: {fileID: 884362135705683049}
-  _healthCounter: {fileID: 8215428049868823203}
---- !u!114 &2601425800223298052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220239327471852908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cda0d9ea2c720c545abefc88cf44e007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pickupRange: 5
-  _pickupLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  _pickUpCode: 101
---- !u!114 &7103639421771119111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220239327471852908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a921e3b9e4c3efa4f8ba04a68c8d2294, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponHolder: {fileID: 988708403539278096}
-  currentWeaponBarel: {fileID: 0}
---- !u!114 &1254661374036110839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220239327471852908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f2ad38de50373946b8e3061b84f0dba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2307466341447790871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59df706a61bb07248b20c809eeb81c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthBar: {fileID: 8091744578628670528}
   weaponUI: {fileID: 4603810880368566850}
 --- !u!1 &1669190887803121151
 GameObject:
@@ -567,6 +519,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6536549749012778326}
   - {fileID: 7683473991580178323}
   m_Father: {fileID: 2857939719721810655}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1469,11 +1422,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2857939719721810655}
+  m_Father: {fileID: 7348167260413104686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 90, y: 0}
   m_SizeDelta: {x: 76, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &8538069739916155622
@@ -1810,6 +1763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2857939719721810655}
+  - component: {fileID: 8091744578628670528}
   m_Layer: 5
   m_Name: HealthPivot
   m_TagString: Untagged
@@ -1829,7 +1783,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6536549749012778326}
   - {fileID: 7348167260413104686}
   m_Father: {fileID: 9111763596563349065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1838,6 +1791,20 @@ RectTransform:
   m_AnchoredPosition: {x: 10, y: 0}
   m_SizeDelta: {x: -20, y: 36}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &8091744578628670528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6353528565672316912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb90281b9defc64d9b755fda0576e68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bar: {fileID: 1040017705585284742}
+  _counter: {fileID: 8215428049868823203}
 --- !u!1 &6727410339975930534
 GameObject:
   m_ObjectHideFlags: 0

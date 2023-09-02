@@ -1,55 +1,42 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerController))]
-public class PlayerPickUp : MonoBehaviour
+
+[Serializable]
+public class PlayerPickUp : IPicker
 {
     [SerializeField] private float _pickupRange = 1.0f;
     [SerializeField] private LayerMask _pickupLayer;
     private Camera _camera;
-    private Inventory _inventory;
+    private IInventory _inventory;
 
-    [SerializeField] private KeyCode _pickUpCode = KeyCode.E;
-
-
-    private void Start()
+    public void InitVariables(Camera camera, IInventory inventory)
     {
-        InitReferences();
+        _camera = camera;
+        _inventory = inventory;
     }
 
-    private void Update()
+    public bool TryPickup()
     {
-        InputHandler();
-    }
+        Ray ray = _camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
 
-    private void InitReferences()
-    {
-        _camera = GetComponentInChildren<Camera>();
-        _inventory = GetComponent<PlayerController>().Inventory;
-    }
-
-    private void InputHandler()
-    {
-        if (Input.GetKey(_pickUpCode))
+        RaycastHit hit;
+        bool success = Physics.Raycast(ray, out hit, _pickupRange, _pickupLayer);
+        if (success)
         {
-            Ray ray = _camera.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2));
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, _pickupRange, _pickupLayer)) 
+            ItemGameObject itemGameObject;
+            if (hit.transform.gameObject.TryGetComponent(out itemGameObject))
             {
-                ItemGameObject itemGameObject;
-                if (hit.transform.gameObject.TryGetComponent(out itemGameObject))
-                {
-                    Weapon weapon = itemGameObject.Pickup() as Weapon;
-                    _inventory.AddItem(weapon);
-                }
-            }
-            else
-            {
-                Debug.Log("Pickup hit not founded");
+                WeaponScriptableObject weapon = itemGameObject.Pickup() as WeaponScriptableObject;
+                _inventory.AddItem(weapon);
             }
         }
+        Debug.Log("Picup result: " + success);
+        return success;
     }
+}
+
+interface IPicker
+{
+    bool TryPickup();
 }

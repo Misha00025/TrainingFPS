@@ -1,30 +1,17 @@
+using System;
 using UnityEngine;
 
-public class WeaponShooting : MonoBehaviour
+[Serializable]
+public class WeaponShooting : IShooter
 {
     private float _lastShootTime = 0;
     private Camera _camera;
-    private IInventory _inventory;
-    private EquipmentManager _equipmentManager;
+    private IEquipmentManager _equipmentManager;
 
-    private void Start()
+    public void InitVariables(Camera camera, IEquipmentManager playerController)
     {
-        GetReferences();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Shoot();
-        }
-    }
-
-    private void GetReferences()
-    {
-        _camera = GetComponentInChildren<Camera>();
-        _inventory = GetComponent<PlayerController>();
-        _equipmentManager = GetComponent<EquipmentManager>();
+        _camera = camera;
+        _equipmentManager = playerController;
     }
 
     private void RaycastShoot(Weapon weapon)
@@ -34,7 +21,7 @@ public class WeaponShooting : MonoBehaviour
 
         float range = 1f;
         if (weapon != null)
-            range = weapon.range;
+            range = weapon.Range;
 
         if (Physics.Raycast(ray, out hit, range))
         {
@@ -44,16 +31,14 @@ public class WeaponShooting : MonoBehaviour
         {
             Debug.Log("Target is out of range");
         }
-
-        if (weapon.muzzleFlashParticles != null)
-            Instantiate(weapon.muzzleFlashParticles, _equipmentManager.currentWeaponBarel);
+        weapon.Shoot();
     }
 
-    private void Shoot()
+    public void Shoot()
     {
-        Weapon weapon = _inventory.GetItem(_equipmentManager.WeaponStyle);
-        if (weapon == null) return;
-        if (Time.time > _lastShootTime + weapon.fireRate)
+        Weapon weapon = _equipmentManager.CurrentWeapon;
+        if (weapon == null) throw new System.Exception("Weapon is Null");
+        if (Time.time > _lastShootTime + weapon.FireRate)
         {
             _lastShootTime = Time.time;
             RaycastShoot(weapon);

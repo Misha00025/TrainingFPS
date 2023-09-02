@@ -9,17 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f052bd3655a364588f9cf640d40934, type: 3}
+  m_Script: {fileID: 11500000, guid: 2cf5a46ba40beae489df2726237278ed, type: 3}
   m_Name: Knife
   m_EditorClassIdentifier: 
   name: Knife
   description: A simple knife
   icon: {fileID: 21300000, guid: e06b4c30724fb5a4dad8af5178dfdcec, type: 3}
-  prefab: {fileID: 1022281448342022424, guid: 69dd2f5c851b5fe43934b2a714acb855, type: 3}
-  muzzleFlashParticles: {fileID: 0}
-  magazineSize: 0
-  magazineCount: 0
-  range: 2
-  fireRate: 1
-  weaponType: 0
-  weaponStyle: 2
+  <prefab>k__BackingField: {fileID: 1022281448342022424, guid: 69dd2f5c851b5fe43934b2a714acb855,
+    type: 3}
+  <muzzleFlashParticles>k__BackingField: {fileID: 0}
+  <magazineSize>k__BackingField: 0
+  <magazineCount>k__BackingField: 0
+  <range>k__BackingField: 1
+  <fireRate>k__BackingField: 1
+  <weaponType>k__BackingField: 0
+  <weaponStyle>k__BackingField: 2
