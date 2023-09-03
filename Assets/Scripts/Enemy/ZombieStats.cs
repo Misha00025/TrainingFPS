@@ -10,8 +10,6 @@ public class ZombieStats : CharacterStats, IDamager
     [SerializeField] private float _attackSpeed;
     [SerializeField] private float _attackDistance;
 
-    private bool _canAttack;
-
     public int Damage => _damage;
     public float AttackSpeed => _attackSpeed;
     public float AttackDistance => _attackDistance;

@@ -20,13 +20,13 @@ public class ZombieController : MonoBehaviour, IHealthState, IDamagable, IDamage
     {
         _stats.InitVariables();
         _attacker.InitVariables(this);
+
+        _stats.AddListenerToDie((IHealthState health) => { Destroy(gameObject); });
     }
 
     public void AddListenerToHealthChange(UnityAction<IHealthState> action) => _stats.AddListenerToHealthChange(action);
-
     public void Attack(Transform target) => _attacker.Attack(target);
-
     public void TakeDamage(int damage) => _stats.TakeDamage(damage);
-
     public void DropAttack() => _attacker.DropAttack();
+    public void AddListenerToDie(UnityAction<IHealthState> action) => _stats.AddListenerToDie(action);
 }

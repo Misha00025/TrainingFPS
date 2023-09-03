@@ -18,6 +18,7 @@ public class ZombieAI : MonoBehaviour
 
     private void Update()
     {
+        if (_target == null) return;
         if (TryAttackTarget()) return;
         MoveToTarget();
         RotateToTarget();
@@ -49,5 +50,10 @@ public class ZombieAI : MonoBehaviour
         }
         _agent.isStopped = success;
         return success;
+    }
+
+    public void SetTarget(Transform target)
+    {
+        _target = target;
     }
 }

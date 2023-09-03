@@ -25,6 +25,11 @@ public class WeaponShooting : IShooter
 
         if (Physics.Raycast(ray, out hit, range))
         {
+            ZombieController controller;
+            if (hit.transform.TryGetComponent(out controller))
+            {
+                controller.TakeDamage(5);
+            }
             Debug.Log("Hit: " + hit.transform.name);
         }
         else 

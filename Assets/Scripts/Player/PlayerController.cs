@@ -70,6 +70,6 @@ public class PlayerController : MonoBehaviour, IMover, IHealthState, IDamagable,
     public void UnequipWeapon() => _equipment.UnequipWeapon();
     public void AddListenerToWeaponChanged(UnityAction<Weapon> action) => _equipment.AddListenerToWeaponChanged(action);
     public void Shoot() => _shooter.Shoot();
-
     public bool TryPickup() => _pickup.TryPickup();
+    public void AddListenerToDie(UnityAction<IHealthState> action) => _stats.AddListenerToDie(action);
 }

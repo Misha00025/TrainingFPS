@@ -10,6 +10,7 @@ public class CharacterStats : IHealthState, IDamagable
     private int _health;
 
     private UnityEvent<IHealthState> _healthChanged = new UnityEvent<IHealthState>();
+    private UnityEvent<IHealthState> _die = new UnityEvent<IHealthState>();
 
     public virtual void InitVariables()
     {
@@ -18,10 +19,15 @@ public class CharacterStats : IHealthState, IDamagable
 
     private void CheckHealth()
     {
-        if (_health < 0)
+        if (_health <= 0)
+        {
             _health = 0;
+            Die();
+        }
         if (_health > _maxHealth)
+        {
             _health = _maxHealth;
+        }
     }
 
     public int Health => _health;
@@ -50,4 +56,29 @@ public class CharacterStats : IHealthState, IDamagable
     {
         _healthChanged.AddListener(action);
     }
+
+    protected virtual void Die()
+    {
+        _die.Invoke(this);
+    }
+
+    public void AddListenerToDie(UnityAction<IHealthState> action)
+    {
+        _die.AddListener(action);
+    }
 }
+
+public interface IHealthState
+{
+    int Health { get; }
+    int MaxHealth { get; }
+
+    void AddListenerToHealthChange(UnityAction<IHealthState> action);
+    void AddListenerToDie(UnityAction<IHealthState> action);
+}
+
+public interface IDamagable
+{
+    void TakeDamage(int damage);
+}
+

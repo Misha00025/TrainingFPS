@@ -1,18 +1,5 @@
 using UnityEngine.Events;
 
-public interface IHealthState
-{
-    int Health { get; }
-    int MaxHealth { get; }
-
-    void AddListenerToHealthChange(UnityAction<IHealthState> action);
-}
-
-public interface IDamagable 
-{
-    void TakeDamage(int damage);
-}
-
 public interface IAmmo
 {
     int Count { get; }

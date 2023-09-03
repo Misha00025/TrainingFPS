@@ -20,7 +20,7 @@ MonoBehaviour:
   <muzzleFlashParticles>k__BackingField: {fileID: 0}
   <magazineSize>k__BackingField: 0
   <magazineCount>k__BackingField: 0
-  <range>k__BackingField: 1
-  <fireRate>k__BackingField: 1
+  <range>k__BackingField: 2.4
+  <fireRate>k__BackingField: 0.7
   <weaponType>k__BackingField: 0
   <weaponStyle>k__BackingField: 2
